@@ -1,0 +1,60 @@
+<html>
+
+<head>
+<script src="d3.js" charset="utf-8"></script>
+</head>
+
+<body> 
+
+<script>
+ 
+    var canvas=d3.select("body")
+	             .append("svg")
+				 .attr("width",1200)
+				 .attr("height",600);
+				 
+	var redCircle=canvas.append("circle")
+	                 .attr("fill","red")
+                     .attr("cx",50)
+                     .attr("cy",50)
+                     .attr("r",25);			 
+				 
+	
+		  
+	var blueCircle=  canvas.append("circle")
+	                           .attr("fill","blue")
+                               .attr("cx",750)
+		                       .attr("cy",50)
+		                       .attr("r",25);
+							   
+	var  greenCircle=  canvas.append("circle")
+	                         .attr("fill","green")
+                             .attr("cx",400)
+		                     .attr("cy",400)
+		                     .attr("r",25);						   
+				 
+	redCircle.transition()    
+	         .duration(1500)
+	         .attr("cx",750);
+
+    blueCircle.transition()    
+	         .duration(1500)
+	         .attr("cx",400)
+             .attr("cy",400); 
+
+    greenCircle.transition()    
+	         .duration(1500)
+	         .attr("cx",50)
+             .attr("cy",50); 			 
+
+    
+		   
+
+	
+</script>	
+
+</body>
+
+
+
+</html>

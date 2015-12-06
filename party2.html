@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+
+</style>
+</head>
+<body>
+<script src="d3.js"></script>
+<script>
+var width = 1200,
+    height = 645
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+var force = d3.layout.force()
+    .gravity(0.05)
+    .charge(-1000)
+    .linkDistance(200)
+    .size([width, height]);
+d3.json("party.json", function(error, json) {
+  if (error) throw error;
+  force
+      .nodes(json.nodes)
+      .links(json.links)
+      .start();
+  var link = svg.selectAll(".link")
+      .data(json.links)
+      .enter().append("line")
+      .attr("class", "link") ;
+	 
+  var node = svg.selectAll(".node")
+      .data(json.nodes)
+      .enter().append("g")
+      .attr("class", "node")
+      .call(force.drag);
+	  
+  node.append("image")
+      .attr("class", "circle")
+      .attr("xlink:href", function(d){
+	  
+	      if(d.name=="Divyamol"){
+		  return "divyamol.jpg";
+		  }
+		  else if(d.name=="Deepthi"){
+		    return "deepthi.jpg"
+		  }
+		  else if(d.name=="Prasoon"){
+		    return "prasoon.jpg"
+		  }
+		  else if(d.name=="Sree Rekha"){
+		    return "rekha.jpg"
+		  }
+		  else if(d.name=="Roop"){
+		    return "roop.jpg"
+		  }
+		  else if(d.name=="Prachi"){
+		    return "prachi.jpg"
+		  }
+		  else if(d.name=="Awanish"){
+		    return "awanish.jpg"
+		  }
+		  else if(d.name=="Vardhan"){
+		    return "vardhan.jpg"
+		  }
+		  else if(d.name=="Pritish"){
+		    return "pritish.jpg"
+		  }
+		  else if(d.name=="Sharvari"){
+		    return "sharvari.jpg"
+		  }
+		  else if(d.name=="Pradeepa"){
+		    return "pradeepa.jpg"
+		  }
+		   else if(d.name=="Harshita"){
+		    return "harshita.jpg"
+		  }
+		  else{
+		  return "";
+		  }
+	  
+	  }
+	  
+	  )
+      .attr("x", "-10px")
+      .attr("y", "-5px")
+      .attr("width", "100px")
+      .attr("height", "100px");
+  node.append("title")
+      .text(function(d) { return d.name; });
+  force.on("tick", function() {
+    link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+		
+    node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+  });
+});
+</script>
+</body>
+</html>
